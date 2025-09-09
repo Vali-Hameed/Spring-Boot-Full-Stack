@@ -9,7 +9,7 @@ cors:
   allowed-headers: "*"
   exposed-headers: "*"
 aws:
-  region: eu-west-1
+  region: eu-north-1
 management:
   endpoints:
     web:
