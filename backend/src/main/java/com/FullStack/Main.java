@@ -3,6 +3,7 @@ package com.FullStack;
 import com.FullStack.customer.Customer;
 import com.FullStack.customer.CustomerRepository;
 import com.FullStack.customer.Gender;
+import com.FullStack.s3.S3Buckets;
 import com.FullStack.s3.S3Service;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
@@ -25,15 +26,20 @@ public class Main {
     CommandLineRunner runner(
             CustomerRepository customerRepository,
             PasswordEncoder passwordEncoder,
-            S3Service s3Service) {
+            S3Service s3Service,
+            S3Buckets s3Buckets) {
                 return args -> {
-                    //creatwRandomCustomner(customerRepository, passwordEncoder);
-                    s3Service.putObject("fs-spring-customer","foo","Hello World".getBytes());
-                    byte[] object = s3Service.getObject("fs-spring-customer","foo");
-                    System.out.println("Hooray: "+ new String(object));
+                    creatwRandomCustomner(customerRepository, passwordEncoder);
+                    TestBucketUploadAbdDownload(s3Service, s3Buckets);
 
                 };
 
+    }
+
+    private static void TestBucketUploadAbdDownload(S3Service s3Service, S3Buckets s3Buckets) {
+        s3Service.putObject(s3Buckets.getCustomer(),"foo","Hello World".getBytes());
+        byte[] object = s3Service.getObject("fs-spring-customer","foo");
+        System.out.println("Hooray: "+ new String(object));
     }
 
     private static void creatwRandomCustomner(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {

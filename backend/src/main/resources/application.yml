@@ -10,6 +10,9 @@ cors:
   exposed-headers: "*"
 aws:
   region: eu-north-1
+  s3:
+    buckets:
+      customer: fs-spring-customer
 management:
   endpoints:
     web:
