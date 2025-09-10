@@ -62,7 +62,7 @@ public class CustomerController {
     }
     @GetMapping( "{customerId}/profile-image")
     public byte[] GetCustomerProfilePicture(@PathVariable("customerId")Integer customerId) {
-        return customerService.getCustomerProfileImage(customerId, file);
+        return customerService.getCustomerProfileImage(customerId);
 
     }
 
